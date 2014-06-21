@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+        title Receiver
+        link(rel="stylesheet", href="/public/style.css")
+    body
+        block content
+            header(style="background:#{color}")
+                .container
+                    a(href="https://play.google.com/store/apps/details?id=ca.joshstagg.receiver")
+                        img(src="/public/img/hat_dark.png").icon
+                    h1 #{pod}
+                    h2 #{ep}
+            .container
+                .content
+                 if src
+                    if video
+                        video(src="#{src}" controls autoplay poster="#{image}")
+                    else
+                        audio(src="#{src}" controls autoplay style="background: url(\"#{image}\") no-repeat center center;")

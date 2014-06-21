@@ -1,0 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300);
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: #3f3f3f;
+    color: #fff;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.container {
+    width:60%;
+    margin:auto;
+}
+.content {
+    text-align: center;
+    vertical-align: bottom;
+    min-height: 240px;
+}
+header {
+    background: #ffa700;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+header .icon {
+    width: 64px;
+    display: inline;
+    float: left;
+    vertical-align: middle;
+}
+header h1 {
+    font-weight: 300;
+    margin: 4px;
+    font-size: 1.2em;
+}
+header h2 {
+    font-weight: 100;
+    margin: 4px;
+}
+video {
+    width: 100%;
+}
+audio {
+    width: 70%;
+    padding-top: 240px;
+    max-width: 400px;
+}
+footer {
+    padding-top: 5px;
+    text-align: center;
+}
+a {
+    color: #fff;
+}
+a:hover {
+    color: #ffa700;
+    text-decoration: none;
+}
+@media (max-width: 970px) {
+    audio {
+        width: 90%;
+    }
+    .container {
+        width:80%;
+    }
+}
+@media (max-width: 480px) {
+    header .icon {
+        width: 46px;
+        display: block;
+    }
+    .content {
+        min-height: 140px;
+    }
+    header h2 {
+        font-size: 1em;
+    }
+    audio {
+        width: 100%;
+        padding-top: 200px;
+    }
+    .container {
+        width:100%;
+    }
+}
