@@ -46,6 +46,7 @@ audio {
     width: 70%;
     padding-top: 240px;
     max-width: 400px;
+    background-size: auto 100% !important;
 }
 footer {
     padding-top: 5px;
