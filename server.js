@@ -1,8 +1,8 @@
-var express = require('express');
-var bodyParser = require('body-parser')
-var short = require('short');
-var mongoose = require('mongoose');
-var app = express();
+var express = require('express'),
+  bodyParser = require('body-parser'),
+  mongoose = require('mongoose'),
+  app = express(),
+  config = require('./config');
 
 // Setup
 app.set('views', __dirname + '/views');
@@ -57,21 +57,22 @@ app.post('/share', function(req, res) {
   share.save(function (err, save) {
     if (err) // ...
       console.log(save);
-    res.json({url: save.url});
+    res.json({url: config.host+'/p/'+save._id});
   });
 });
 
-app.get('/:id', function(req, res) {
+app.get('/p/:id', function(req, res) {
   if (req.params.id) {
     Share.findById(req.params.id, function (err, share) {
       if (err) return console.error(err);
       res.render('index', share);
     });
-  } else {
-    res.redirect('https://play.google.com/store/apps/details?id=ca.joshstagg.receiver');
   }
 });
+app.get('/', function (req, res) {
+  res.redirect('https://play.google.com/store/apps/details?id=ca.joshstagg.receiver');
+});
 
-app.listen(3000);
-console.log("Server is running.");
+app.listen(config.port);
+console.log("Server is running on: "+config.url);
 
