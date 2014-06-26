@@ -21,6 +21,7 @@ var Share = mongoose.model('Share', {
   video: Boolean,
   color: String,
   image: String,
+  feed: String,
   urlHash: String
 });
 
@@ -69,7 +70,7 @@ var linkHash = function() {
 
 
 
-// /share?p=[podcast]&e=[episode]&t=[0h00m00s]&v=[video]&c=[color]&i=[image]&f=[file]
+// /share?p=[podcast]&e=[episode]&t=[0h00m00s]&v=[video]&c=[color]&i=[image]&s=[feedurl]&f=[file]
 // DEMO:
 // curl --data '{"p":"This American Life","e":"527: 180 Degrees","v":"false",
 // "t":"0h04m00s","f":"http://feeds.thisamericanlife.org/~r/talpodcast/~5/NoHdV_K8jdY/527.mp3",
@@ -85,6 +86,7 @@ app.get('/share', function(req, res) {
     src: q.f,
     video: q.v === 'true',
     color: q.c ? q.c : "#ffa700",
+    feed: q.s,
     image: q.i ? q.i : "/public/img/hat_dark.png"
   });
 });
@@ -100,6 +102,7 @@ app.post('/share', function(req, res) {
       video: q.v === 'true',
       color: q.c ? q.c : "#ffa700",
       image: q.i ? q.i : "/public/img/hat_dark.png",
+      feed: q.s,
       urlHash: result
     });
     share.save(function (err, save) {
@@ -119,6 +122,10 @@ app.get('/p/:id', function(req, res) {
       if (share === undefined || share === null || share.length === 0) {
         res.send(404)
       } else {
+        // Remove leaky data.
+        delete share.__v;
+        delete share._id;
+        // Format specifi return.
         if (q.format === 'json') {
           res.json(share);
         } else {

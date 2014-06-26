@@ -9,7 +9,8 @@ html(lang="en")
                 .container
                     a(href="https://play.google.com/store/apps/details?id=ca.joshstagg.receiver")
                         img(src="/public/img/hat_dark.png").icon
-                    h1 #{pod}
+                    h1
+                        a(href="#{feed}").subscribe #{pod}
                     h2 #{ep}
             .container
                 .content
