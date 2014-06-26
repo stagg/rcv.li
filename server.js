@@ -112,15 +112,19 @@ app.post('/share', function(req, res) {
 
 app.get('/p/:id', function(req, res) {
   if (req.params.id) {
+    var q = req.query;
     Share.findOne({urlHash: req.params.id}, function (err, share) {
       console.log(share);
       if (err) {console.error(err); res.send(503);}
       if (share === undefined || share === null || share.length === 0) {
         res.send(404)
       } else {
-        res.render('index', share);
+        if (q.format === 'json') {
+          res.json(share);
+        } else {
+          res.render('index', share);
+        }
       }
-
     });
   } else {
     res.send(404);
