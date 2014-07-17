@@ -22,7 +22,8 @@ var Share = mongoose.model('Share', {
   color: String,
   image: String,
   feed: String,
-  urlHash: String
+  urlHash: String,
+  guid: String
 });
 
 
@@ -70,12 +71,12 @@ var linkHash = function() {
 
 
 
-// /share?p=[podcast]&e=[episode]&t=[0h00m00s]&v=[video]&c=[color]&i=[image]&s=[feedurl]&f=[file]
+// /share?p=[podcast]&e=[episode]&t=[0h00m00s]&v=[video]&c=[color]&i=[image]&s=[feedurl]&f=[file]&g=[GUID]
 // DEMO:
-// curl --data '{"p":"This American Life","e":"527: 180 Degrees","v":"false",
-// "t":"0h04m00s","f":"http://feeds.thisamericanlife.org/~r/talpodcast/~5/NoHdV_K8jdY/527.mp3",
-// "c":"e2422c","i":"http://mediad.publicbroadcasting.net/p/kmuw/files/201307/this-american-life.jpg"}'
-// -H "Content-Type: application/json" http://localhost:3000/share
+//curl --data '{"p":"This American Life","e":"527: 180 Degrees","v":"false",
+//"t":"0h04m00s","f":"http://feeds.thisamericanlife.org/~r/talpodcast/~5/NoHdV_K8jdY/527.mp3",
+//"c":"e2422c","i":"http://mediad.publicbroadcasting.net/p/kmuw/files/201307/this-american-life.jpg", "g":"GUIDSTRINGHERE"}'
+//-H "Content-Type: application/json" http://localhost:3000/share
 
 app.get('/share', function(req, res) {
   var q = req.query;
@@ -87,7 +88,8 @@ app.get('/share', function(req, res) {
     video: q.v === 'true',
     color: q.c ? q.c : "#ffa700",
     feed: q.s,
-    image: q.i ? q.i : "/public/img/hat_dark.png"
+    image: q.i ? q.i : "/public/img/hat_dark.png",
+    guid: q.g
   });
 });
 
@@ -103,6 +105,7 @@ app.post('/share', function(req, res) {
       color: q.c ? q.c : "#ffa700",
       image: q.i ? q.i : "/public/img/hat_dark.png",
       feed: q.s,
+      guid: q.g,
       urlHash: result
     });
     share.save(function (err, save) {
