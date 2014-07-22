@@ -3,6 +3,8 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Promise = require("promise"),
   app = express(),
+  favicon = require('serve-favicon'),
+  path = require('path'),
   config = require('./config');
 
 // Setup
@@ -10,6 +12,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));
+app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 
 mongoose.connect('mongodb://localhost/receiverlink');
 

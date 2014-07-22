@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "express": "4.4.x",
+    "serve-favicon": "*",
     "body-parser": "*",
     "mongoose": "*",
     "short": "2.2.0",
